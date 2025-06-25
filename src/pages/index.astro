@@ -1,0 +1,134 @@
+---
+import MenuSection from '../components/MenuSection.astro';
+import DishCard from '../components/DishCard.astro';
+import MenuLayout from '../layouts/MenuLayout.astro';
+---
+
+<MenuLayout>
+  <div class="container mx-auto py-8 px-4">
+    {/* Header con logo/nombre */}
+    <div class="flex flex-col items-center mb-8">
+      <img 
+        src="/images/Edli.png"
+        alt="Logo"
+        class="w-[12.5rem] h-[11.25rem] mb-2 rounded-full border-4 border-red-600 shadow-md"
+      />
+      <h1 class="text-4xl font-black text-center text-red-600 drop-shadow">Edli nombre</h1>
+      <p class="text-lg text-gray-700 text-center mt-2">¡Bienvenido! Prueba la mejor comida peruana tradicional.</p>
+    </div>
+
+    {/* Menú Sections */}
+    <MenuSection title="🍗 Pollo">
+      <DishCard 
+        name="Pollo a la Brasa"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '1/8', precio: 9 },
+          { porcion: '1/4', precio: 13 },
+          { porcion: '1/2', precio: 25 },
+          { porcion: 'Entero', precio: 50 }
+        ]}
+      />
+      <DishCard 
+        name="Pollo Broster"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '1/8', precio: 9 },
+          { porcion: '1/4', precio: 13 }
+        ]}
+      />
+      <DishCard 
+        name="Monstrito Braza"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '1/8', precio: 10 },
+          { porcion: '1/4', precio: 14 }
+        ]}
+      />
+      <DishCard 
+        name="Monstrito Broster"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '1/8', precio: 10 },
+          { porcion: '1/4', precio: 14 }
+        ]}
+      />
+      <DishCard 
+        name="Alitas BBQ/Acevichadas"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '4 piezas', precio: 10 },
+          { porcion: '6 piezas', precio: 12 },
+          { porcion: '8 piezas', precio: 18 }
+        ]}
+      />
+    </MenuSection>
+
+    <MenuSection title="🍟 Extra">
+      <DishCard 
+        name="Salchipapa"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '', precio: 8 }
+        ]}
+      />
+      <DishCard 
+        name="Salchibroster"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '', precio: 12 }
+        ]}
+      />
+    </MenuSection>
+
+    <MenuSection title="🍛 Chaufa">
+      <DishCard 
+        name="Chaufa"
+        image="pollo_brasa.jpg"
+        prices={[
+          { porcion: '', precio: 10 }
+        ]}
+      />
+    </MenuSection>
+
+    <MenuSection title="☕ Bebidas Calientes">
+      <DishCard 
+        name="Anís"
+        image="cafe.jpg"
+        prices={[
+          { porcion: '', precio: 2 }
+        ]}
+      />
+      <DishCard 
+        name="Té"
+        image="cafe.jpg"
+        prices={[
+          { porcion: '', precio: 2 }
+        ]}
+      />
+      <DishCard 
+        name="Café"
+        image="cafe.jpg"
+        prices={[
+          { porcion: '', precio: 3 }
+        ]}
+      />
+    </MenuSection>
+
+    <MenuSection title="🍮 Postres">
+      <DishCard 
+        name="Gelatina"
+        image="gelatina.jpg"
+        prices={[
+          { porcion: '', precio: 1 }
+        ]}
+      />
+    </MenuSection>
+
+    <MenuSection title="🍹 Tragos y Jugos">
+      <p class="p-4 border rounded-lg shadow bg-gradient-to-r from-orange-100 to-red-50 text-center text-lg font-semibold text-red-600">
+        Consulta con el personal por disponibilidad y precios.
+      </p>
+    </MenuSection>
+  </div>
+</MenuLayout>

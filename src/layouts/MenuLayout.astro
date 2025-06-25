@@ -1,0 +1,22 @@
+---
+import '../styles/global.css';
+
+// Recibe props desde la página, si alguna vez quieres pasar un título personalizado
+const { title = "Carta de Comida Peruana" } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content="Disfruta de la mejor comida peruana en nuestro restaurante. Carta digital, fácil y rápida." />
+    <link rel="icon" href="/images/logo.png" />
+  </head>
+<body class="min-h-screen bg-gradient-to-b from-white via-yellow-50 to-amber-100 text-gray-900">
+    <slot />
+    <footer class="mt-12 p-4 text-center text-gray-400 text-sm">
+      © {new Date().getFullYear()} Restaurante | Hecho con ❤️ en Perú
+    </footer>
+  </body>
+</html>

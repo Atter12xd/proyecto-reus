@@ -1,0 +1,17 @@
+---
+const { title, description, id = "" } = Astro.props;
+const [icon, ...restTitle] = title.split(" ");
+---
+
+<section id={id} class="my-10">
+  <div class="flex items-center gap-2 mb-4">
+    <span class="text-4xl">{icon}</span>
+    <h2 class="text-3xl font-extrabold text-orange-500">{restTitle.join(" ")}</h2>
+  </div>
+  {description && (
+    <p class="text-gray-500 mb-3">{description}</p>
+  )}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <slot />
+  </div>
+</section>
