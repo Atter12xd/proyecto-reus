@@ -3,7 +3,7 @@ const { name, prices, image, description = "" } = Astro.props;
 // prices: Array de objetos: [{porcion: '1/8', precio: 9}]
 ---
 
-<div class="border rounded-2xl shadow-md overflow-hidden flex flex-col h-full bg-white transition hover:scale-105 duration-200">
+<div class="border-none rounded-2xl shadow-lg overflow-hidden flex flex-col h-full bg-gradient-to-b from-neutral-900 via-zinc-900 to-black transition hover:scale-105 duration-200">
   <div class="w-full" style="aspect-ratio: 4/3;">
     <img
       src={`/images/${image}`}
@@ -13,19 +13,19 @@ const { name, prices, image, description = "" } = Astro.props;
     />
   </div>
   <div class="p-4 flex-1 flex flex-col">
-    <h3 class="text-lg sm:text-xl font-bold mb-2">{name}</h3>
-    {description && <p class="text-gray-500 text-sm mb-2">{description}</p>}
+    <h3 class="text-lg sm:text-xl font-extrabold mb-2 text-yellow-200 drop-shadow">{name}</h3>
+    {description && <p class="text-yellow-100 text-sm mb-2">{description}</p>}
     <ul class="flex flex-col gap-1">
       {Array.isArray(prices)
         ? prices.map(({ porcion, precio }) => (
             <li class="flex justify-between items-center">
-              <span class="text-base">{porcion}</span>
-              <span class="bg-red-100 text-red-600 font-bold rounded px-3 py-1 text-sm shadow-sm">
+              <span class="text-base text-yellow-50">{porcion}</span>
+              <span class="bg-yellow-700/80 text-yellow-100 font-bold rounded px-3 py-1 text-sm shadow">
                 S/{precio}
               </span>
             </li>
           ))
-        : <span>{prices}</span>
+        : <span class="text-yellow-50">{prices}</span>
       }
     </ul>
   </div>
