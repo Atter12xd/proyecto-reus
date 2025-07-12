@@ -1,157 +1,211 @@
 ---
 import MenuSection from '../components/MenuSection.astro';
-import DishCard from '../components/DishCard.astro';
 import MenuLayout from '../layouts/MenuLayout.astro';
 ---
 
 <MenuLayout>
-  <div class="container mx-auto py-8 px-2 sm:px-4 relative">
+  <div class="container mx-auto py-6 px-3 sm:px-4 relative">
     
-    {/* --- Barra sticky SIEMPRE visible --- */}
-    <div class="flex flex-wrap gap-3 justify-center sticky top-0 z-50 bg-gradient-to-b from-black/90 via-yellow-900/20 to-transparent backdrop-blur-md shadow-2xl rounded-b-2xl py-4 px-3 mb-6">
-      <a href="#pollo" class="nav-btn">🍗 Pollo</a>
-      <a href="#salchipapa" class="nav-btn">🍟 Salchipapa</a>
-      <a href="#chaufa" class="nav-btn">🍛 Chaufa</a>
-      <a href="#bebidasCa" class="nav-btn">☕ Bebidas Calientes</a>
-      <a href="#postres" class="nav-btn">🍮 Postres</a>
-      <a href="#tragos" class="nav-btn">🍹 Tragos</a>
+    {/* --- Barra sticky mejorada con scroll horizontal en móvil --- */}
+    <div class="sticky top-0 z-50 bg-gradient-to-b from-black/98 via-yellow-900/30 to-transparent backdrop-blur-xl shadow-2xl rounded-b-3xl py-3 px-2 mb-8">
+      <div class="overflow-x-auto scrollbar-hide">
+        <div class="flex gap-2 min-w-max justify-center px-2">
+          <a href="#pollo-brasa" class="nav-btn-mobile">🍗 <span class="hidden xs:inline">Pollo a la Brasa</span><span class="xs:hidden">Pollo</span></a>
+          <a href="#alitas" class="nav-btn-mobile">🍖 Alitas</a>
+          <a href="#broaster" class="nav-btn-mobile">🍛 Broaster</a>
+          <a href="#salchipapa" class="nav-btn-mobile">🍟 <span class="hidden xs:inline">Salchipapa</span><span class="xs:hidden">Salchi</span></a>
+          <a href="#chaufa" class="nav-btn-mobile">🍜 Chaufa</a>
+          <a href="#extras" class="nav-btn-mobile">🍽️ Extras</a>
+          <a href="#jugos" class="nav-btn-mobile">🥤 Jugos</a>
+          <a href="#costilla" class="nav-btn-mobile">🥩 <span class="hidden xs:inline">Costilla BBQ</span><span class="xs:hidden">BBQ</span></a>
+          <a href="#bebidas" class="nav-btn-mobile">🥤 Bebidas</a>
+        </div>
+      </div>
+      {/* Indicador de scroll */}
+      <div class="flex justify-center mt-2 sm:hidden">
+        <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent rounded-full animate-pulse"></div>
+      </div>
     </div>
 
-    {/* --- Logo + nombre + glow dorado --- */}
-    <div class="flex flex-col items-center mb-10 relative z-10">
-      {/* Glow detrás del logo */}
-      <div class="absolute top-12 left-1/2 -translate-x-1/2 pointer-events-none">
-        <div class="w-[14rem] h-[14rem] rounded-full blur-2xl bg-yellow-700 opacity-30 scale-110 animate-pulse" />
+    {/* --- Logo mejorado con efectos --- */}
+    <div class="flex flex-col items-center mb-8 relative z-10">
+      {/* Multiple glows para mayor impacto */}
+      <div class="absolute top-8 left-1/2 -translate-x-1/2 pointer-events-none">
+        <div class="w-[20rem] h-[20rem] rounded-full blur-3xl bg-gradient-to-r from-yellow-600/20 to-orange-500/20 animate-pulse" />
       </div>
-      <img 
-        src="/images/LogoOfy.jpeg"
-        alt="Logo"
-        class="w-48 h-48 mb-2 rounded-full border-4 border-yellow-500 shadow-xl z-10 bg-black/70 object-cover"
-        style="object-position:center;"
-      />
-      <h1 class="text-5xl font-extrabold text-center text-yellow-400 drop-shadow-xl tracking-wide font-[Montserrat,sans-serif] animate-fade-in mt-2">
+      <div class="absolute top-12 left-1/2 -translate-x-1/2 pointer-events-none">
+        <div class="w-[15rem] h-[15rem] rounded-full blur-2xl bg-yellow-500/30 animate-glow" />
+      </div>
+      
+      {/* Contenedor del logo con efecto hover */}
+      <div class="relative group">
+        <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
+        <img 
+          src="/images/LogoOfy.jpeg"
+          alt="KAUSA BEATS 24"
+          class="relative w-40 h-40 sm:w-48 sm:h-48 mb-3 rounded-full border-4 border-yellow-400/80 shadow-2xl z-10 bg-black object-cover hover:scale-105 transition-transform duration-300"
+          style="object-position:center;"
+        />
+      </div>
+      
+      <h1 class="text-4xl sm:text-5xl font-black text-center bg-gradient-to-r from-yellow-200 via-yellow-400 to-orange-400 bg-clip-text text-transparent drop-shadow-2xl tracking-tight font-[Montserrat,sans-serif] animate-fade-in mt-3">
         KAUSA BEATS 24
       </h1> 
-      <p class="text-lg sm:text-xl text-yellow-100/90 text-center mt-2 font-light animate-fade-in-slow">
-        Pollería · Gastronomía Fusión · Café · Bar
+      <p class="text-base sm:text-xl text-yellow-100/90 text-center mt-2 font-light animate-fade-in-slow px-4">
+        Pollería · Fusión · Café · Bar
       </p>
-      <span class="block w-24 h-1 mt-4 rounded-full bg-gradient-to-r from-yellow-700 via-yellow-400 to-yellow-200 opacity-60 animate-glow" />
+      <div class="flex gap-2 mt-4">
+        <span class="block w-12 h-1 rounded-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60 animate-glow" />
+        <span class="block w-8 h-1 rounded-full bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-60 animate-glow animation-delay-200" />
+        <span class="block w-12 h-1 rounded-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60 animate-glow animation-delay-400" />
+      </div>
     </div>
 
-    {/* Menú Sections */}
-    <div class="space-y-16">
-    <MenuSection id="pollo" title="🍗 Pollo">
-      <DishCard 
-        name="Pollo a la Brasa"
-        image="pollo_brasa.jpg"
-        prices={[
-          { porcion: '1/8', precio: 9 },
-          { porcion: '1/4', precio: 13 },
-          { porcion: '1/2', precio: 25 },
-          { porcion: 'Entero', precio: 50 }
+    {/* Menú Sections con espaciado mejorado */}
+    <div class="space-y-12 sm:space-y-16">
+      
+      <MenuSection 
+        id="pollo-brasa" 
+        title="🍗 Pollos a la Brasa"
+        image="pollo.jpeg"
+        featured={true}
+        dishes={[
+          { name: "Pollo Entero", price: "S/50.00", description: "Incluye papas y ensalada" },
+          { name: "1/2 Pollo", price: "S/25.00", description: "Incluye papas y ensalada" },
+          { name: "1/4 Pollo", price: "S/13.00" },
+          { name: "1/8 Pollo", price: "S/8.00" },
+          { name: "Monstro 1/4", price: "S/15.00", description: "Con extra papas" },
+          { name: "Monstrito 1/8", price: "S/10.00", description: "Con extra papas" },
+          { name: "Porción de Papa", price: "S/6.00" }
         ]}
       />
-      <DishCard 
-        name="Pollo Broster"
-        image="polloBroster.jpeg"
-        prices={[
-          { porcion: '1/8', precio: 9 },
-          { porcion: '1/4', precio: 13 }
-        ]}
-      />
-      <DishCard 
-        name="Monstrito Braza"
-        image="monstritoBraza.jpeg"
-        prices={[
-          { porcion: '1/8', precio: 10 },
-          { porcion: '1/4', precio: 14 }
-        ]}
-      />
-      <DishCard 
-        name="Monstrito Broster"
-        image="monstritoBroster.jpeg"
-        prices={[
-          { porcion: '1/8', precio: 10 },
-          { porcion: '1/4', precio: 14 }
-        ]}
-      />
-      <DishCard 
-        name="Alitas BBQ/Acevichadas"
+
+      <MenuSection 
+        id="alitas" 
+        title="🍖 Alitas"
         image="AlitasBBQ.jpeg"
-        prices={[
-          { porcion: '4 piezas', precio: 10 },
-          { porcion: '6 piezas', precio: 12 },
-          { porcion: '8 piezas', precio: 18 }
+        dishes={[
+          { name: "Alitas Acevichadas", price: "x6 piezas S/15.00 - x10 piezas S/22.00" },
+          { name: "Alitas Picantes", price: "x6 piezas S/15.00 - x10 piezas S/22.00" },
+          { name: "Alitas BBQ", price: "x6 piezas S/15.00 - x10 piezas S/22.00" }
         ]}
       />
-    </MenuSection>
-    </div>
 
-    <MenuSection id="salchipapa" title="🍟 Salchipapa">
-      <DishCard 
-        name="Salchipapa"
+      <MenuSection 
+        id="broaster" 
+        title="🍛 Pollo Broaster"
+        image="polloBroster.jpeg"
+        dishes={[
+          { name: "1/4 de Broaster", price: "S/16.00" },
+          { name: "1/8 de Broaster", price: "S/12.00" },
+          { name: "1/4 de Broaster c/ Chaufa", price: "S/18.00" },
+          { name: "1/8 de Broaster c/ Chaufa", price: "S/15.00" }
+        ]}
+      />
+
+      <MenuSection 
+        id="salchipapa" 
+        title="🍟 Salchipapa"
         image="salchipapa.jpeg"
-        prices={[
-          { porcion: '', precio: 8 }
+        dishes={[
+          { name: "Salchipapa Simple", price: "S/6.00" },
+          { name: "Salchipapa Especial", price: "S/8.00", description: "Con huevo frito" },
+          { name: "Salchichaufa", price: "S/13.00" }
         ]}
       />
-      <DishCard 
-        name="Salchibroster"
-        image="salchibroster.jpeg"
-        prices={[
-          { porcion: '', precio: 12 }
-        ]}
-      />
-    </MenuSection>
 
-    <MenuSection id="chaufa" title="🍛 Chaufa">
-      <DishCard 
-        name="Chaufa"
+      <MenuSection 
+        id="chaufa" 
+        title="🍜 Plato Chaufa"
         image="chaufa.jpeg"
-        prices={[
-          { porcion: '', precio: 10 }
+        dishes={[
+          { name: "Chaufa Amazónico", price: "S/16.00", highlight: true },
+          { name: "Chaufa de Pollo", price: "S/12.00" },
+          { name: "Chaufa de Carne", price: "S/15.00" },
+          { name: "Chaufa Mixto", price: "S/18.00" },
+          { name: "Chaufa de Chancho", price: "S/17.00" },
+          { name: "Chaufa de Mariscos", price: "S/15.00" },
+          { name: "Aeropuerto de Pollo", price: "S/13.00" },
+          { name: "Aeropuerto de Chancho", price: "S/17.00" },
+          { name: "Aeropuerto 3 Sabores", price: "S/20.00", highlight: true },
+          { name: "Tallarín Chifa", price: "S/15.00" },
+          { name: "Tallarín Chifa Combinado", price: "S/19.00" },
+          { name: "Pollo Enrollado c/ Chaufa", price: "S/22.00", highlight: true },
+          { name: "Pollo c/ Piña", price: "S/17.00" },
+          { name: "Pollo c/ Durazno", price: "S/17.00" },
+          { name: "Pollo c/ Verdura", price: "S/17.00" }
         ]}
       />
-    </MenuSection>
 
-    <MenuSection id="bebidasCa" title="☕ Bebidas Calientes">
-      <DishCard 
-        name="Anís"
-        image="anis.jpeg"
-        prices={[
-          { porcion: '', precio: 2 }
+      <MenuSection 
+        id="extras" 
+        title="🍽️ Extras"
+        image="LomoSaltado.jpeg"
+        dishes={[
+          { name: "Lomo Saltado", price: "S/12.00" },
+          { name: "Saltado de Pollo", price: "S/12.00" },
+          { name: "Chuleta a la Parrilla", price: "S/16.00" },
+          { name: "Mollejita a la Parrilla", price: "S/15.00" },
+          { name: "Tallarín Saltado de Pollo", price: "S/12.00" },
+          { name: "Tallarín Saltado de Carne", price: "S/12.00" },
+          { name: "Trucha Frita", price: "S/12.00" },
+          { name: "Trucha a la Parrilla", price: "S/12.00" },
+          { name: "Trucha Apanado", price: "S/12.00" },
+          { name: "Chicharrón de Pollo", price: "S/12.00" }
         ]}
       />
-      <DishCard 
-        name="Té"
-        image="te.jpeg"
-        prices={[
-          { porcion: '', precio: 2 }
-        ]}
-      />
-      <DishCard 
-        name="Café"
-        image="cafe.jpg"
-        prices={[
-          { porcion: '', precio: 3 }
-        ]}
-      />
-    </MenuSection>
 
-    <MenuSection id="postres" title="🍮 Postres">
-      <DishCard 
-        name="Gelatina"
-        image="gelatina.jpg"
-        prices={[
-          { porcion: '', precio: 1 }
+      <MenuSection 
+        id="jugos" 
+        title="🥤 Jugos"
+        image="jugo.jpeg"
+        dishes={[
+          { name: "Maracuyá", price: "S/7.00" },
+          { name: "Mango", price: "S/7.00" },
+          { name: "Piña", price: "S/6.00" },
+          { name: "Fresa", price: "S/7.00" },
+          { name: "Plátano", price: "S/6.00" },
+          { name: "Sandía", price: "S/6.00" }
         ]}
       />
-    </MenuSection>
 
-    <MenuSection id="tragos" title="🍹 Tragos y Jugos">
-      <p class="p-4 border rounded-lg shadow bg-gradient-to-r from-orange-100 to-red-50 text-center text-lg font-semibold text-red-600">
-        Consulta con el personal por disponibilidad y precios.
-      </p>
-    </MenuSection>
+      <MenuSection 
+        id="costilla" 
+        title="🥩 Costilla BBQ"
+        image="BBQ.jpeg"
+        featured={true}
+        dishes={[
+          { name: "Costilla Cerdo BBQ", price: "S/28.00", description: "Con papas y ensalada" },
+          { name: "Brocheta de Lomo", price: "S/17.00" },
+          { name: "Brocheta de Pollo", price: "S/17.00" }
+        ]}
+      />
+
+      <MenuSection 
+        id="bebidas" 
+        title="🥤 Bebidas"
+        image="gaseosa.jpeg"
+        dishes={[
+          { name: "Inka o Coca Personal", price: "S/3.50" },
+          { name: "Inka o Coca 1 Litro", price: "S/7.00" },
+          { name: "Inka o Coca 1.5 Litros", price: "S/10.00" },
+          { name: "Inka o Coca 3 Litros", price: "S/14.00" },
+          { name: "Agua Mineral", price: "S/2.00" },
+          { name: "Jarra Chicha", price: "S/8.00" },
+          { name: "Vaso Chicha", price: "S/2.00" },
+          { name: "Manzanilla", price: "S/2.50" }
+        ]}
+      />
+
+    </div>
   </div>
 </MenuLayout>
+
+<style>
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+</style>

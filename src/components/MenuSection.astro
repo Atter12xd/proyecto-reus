@@ -1,20 +1,115 @@
 ---
-const { title, description, id = "" } = Astro.props;
+const { title, image, dishes = [], id = "", featured = false } = Astro.props;
 const [icon, ...restTitle] = title.split(" ");
 ---
 
-<section id={id} class="my-12">
-  <div class="flex items-center gap-3 mb-6">
-    <span class="text-5xl sm:text-6xl drop-shadow-sm">{icon}</span>
-    <h2 class="text-3xl sm:text-4xl font-black text-yellow-400 drop-shadow tracking-tight uppercase">
+<section id={id} class="my-8 sm:my-12 scroll-mt-20">
+  <!-- Título de la sección mejorado -->
+  <div class="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8 px-2">
+    <span class="text-4xl sm:text-6xl drop-shadow-lg animate-float">{icon}</span>
+    <h2 class="text-2xl sm:text-4xl font-black bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent drop-shadow tracking-tight uppercase flex-1">
       {restTitle.join(" ")}
     </h2>
-    <div class="flex-1 h-1 ml-2 bg-gradient-to-r from-yellow-600/40 via-yellow-400/30 to-transparent rounded-full" />
+    <div class="hidden sm:flex flex-1 h-1 ml-2 bg-gradient-to-r from-yellow-600/40 via-yellow-400/30 to-transparent rounded-full" />
   </div>
-  {description && (
-    <p class="text-yellow-100/80 mb-5 text-base sm:text-lg">{description}</p>
-  )}
-  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    <slot />
+
+  <!-- Contenedor principal con mejor diseño móvil -->
+  <div class="space-y-6">
+    
+    <!-- Imagen hero mejorada para móvil -->
+    <div class={`relative group overflow-hidden rounded-2xl shadow-2xl ${featured ? 'ring-4 ring-yellow-400/50' : ''}`}>
+      {/* Efectos de luz */}
+      <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+      
+      {/* Imagen con aspect ratio mejorado */}
+      <div class="relative w-full aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] overflow-hidden">
+        <img
+          src={`/images/${image}`}
+          alt={restTitle.join(" ")}
+          class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+          loading="lazy"
+        />
+        
+        {/* Overlay gradient mejorado */}
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+        
+        {/* Título sobre la imagen */}
+        <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+          <h3 class="text-2xl sm:text-3xl font-black text-white drop-shadow-2xl flex items-center gap-2">
+            <span class="text-3xl sm:text-4xl">{icon}</span>
+            <span>{restTitle.join(" ")}</span>
+          </h3>
+          {featured && (
+            <span class="inline-block mt-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-xs sm:text-sm font-bold px-3 py-1 rounded-full">
+              ⭐ Recomendado
+            </span>
+          )}
+        </div>
+      </div>
+      
+      {/* Badge con número de platos */}
+      <div class="absolute top-3 right-3 bg-black/80 backdrop-blur-sm text-yellow-400 font-bold text-xs sm:text-sm px-3 py-1.5 rounded-full shadow-xl border border-yellow-400/30 z-20">
+        {dishes.length} opciones
+      </div>
+    </div>
+
+    <!-- Lista de platos en cards para móvil -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 px-2 sm:px-0">
+      {dishes.map((dish, index) => (
+        <div 
+          class={`
+            relative p-4 rounded-xl backdrop-blur-sm shadow-lg
+            bg-gradient-to-br from-neutral-900/90 via-zinc-900/80 to-black/90
+            border border-yellow-500/20 hover:border-yellow-400/40
+            transform hover:scale-105 hover:-translate-y-1 transition-all duration-300
+            animate-fade-in
+            ${dish.highlight ? 'ring-2 ring-yellow-400/50' : ''}
+          `}
+          style={`animation-delay: ${index * 50}ms`}
+        >
+          {/* Highlight badge */}
+          {dish.highlight && (
+            <div class="absolute -top-2 -right-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-black text-xs font-bold px-2 py-0.5 rounded-full shadow-lg animate-pulse">
+              Popular
+            </div>
+          )}
+          
+          <div class="space-y-2">
+            <h3 class="font-bold text-yellow-100 text-sm sm:text-base leading-tight">
+              {dish.name}
+            </h3>
+            
+            {dish.description && (
+              <p class="text-xs text-yellow-200/70 italic">
+                {dish.description}
+              </p>
+            )}
+            
+            <div class="pt-2">
+              <span class="inline-block bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-lg">
+                {dish.price}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+</style>

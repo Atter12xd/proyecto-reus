@@ -1,32 +1,57 @@
 ---
 const { name, prices, image, description = "" } = Astro.props;
-// prices: Array de objetos: [{porcion: '1/8', precio: 9}]
+// prices puede ser string o array de objetos: [{porcion: '1/8', precio: 9}]
 ---
 
-<div class="border-none rounded-2xl shadow-lg overflow-hidden flex flex-col h-full bg-gradient-to-b from-neutral-900 via-zinc-900 to-black transition hover:scale-105 duration-200">
-  <div class="w-full" style="aspect-ratio: 4/3;">
+<div class="group relative border-none rounded-2xl shadow-xl overflow-hidden bg-gradient-to-b from-neutral-900/95 via-zinc-900/90 to-black/95 backdrop-blur-sm hover:scale-[1.02] transition-all duration-300">
+  {/* Efecto de brillo en hover */}
+  <div class="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-400/10 to-yellow-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+  
+  {/* Contenedor de imagen mejorado */}
+  <div class="relative w-full aspect-[4/3] overflow-hidden">
     <img
       src={`/images/${image}`}
       alt={name}
-      class="w-full h-full object-cover"
+      class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
       loading="lazy"
     />
+    {/* Gradient overlay */}
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+    
+    {/* Nombre sobre la imagen */}
+    <div class="absolute bottom-0 left-0 right-0 p-4">
+      <h3 class="text-lg sm:text-xl font-black text-white drop-shadow-2xl line-clamp-2">
+        {name}
+      </h3>
+    </div>
   </div>
-  <div class="p-4 flex-1 flex flex-col">
-    <h3 class="text-lg sm:text-xl font-extrabold mb-2 text-yellow-200 drop-shadow">{name}</h3>
-    {description && <p class="text-yellow-100 text-sm mb-2">{description}</p>}
-    <ul class="flex flex-col gap-1">
-      {Array.isArray(prices)
-        ? prices.map(({ porcion, precio }) => (
-            <li class="flex justify-between items-center">
-              <span class="text-base text-yellow-50">{porcion}</span>
-              <span class="bg-yellow-700/80 text-yellow-100 font-bold rounded px-3 py-1 text-sm shadow">
-                S/{precio}
-              </span>
-            </li>
-          ))
-        : <span class="text-yellow-50">{prices}</span>
-      }
-    </ul>
+  
+  {/* Contenido */}
+  <div class="p-4 space-y-3">
+    {description && (
+      <p class="text-yellow-100/80 text-sm italic line-clamp-2">
+        {description}
+      </p>
+    )}
+    
+    {/* Precios */}
+    <div class="space-y-2">
+      {typeof prices === 'string' ? (
+        <div class="flex justify-between items-center">
+          <span class="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold rounded-full px-4 py-2 text-sm sm:text-base shadow-lg">
+            {prices}
+          </span>
+        </div>
+      ) : (
+        Array.isArray(prices) && prices.map(({ porcion, precio }) => (
+          <div class="flex justify-between items-center p-2 rounded-lg bg-black/30 hover:bg-yellow-900/20 transition-colors">
+            <span class="text-yellow-100 text-sm sm:text-base">{porcion}</span>
+            <span class="bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold rounded-full px-3 py-1 text-sm shadow">
+              S/{precio}
+            </span>
+          </div>
+        ))
+      )}
+    </div>
   </div>
 </div>
